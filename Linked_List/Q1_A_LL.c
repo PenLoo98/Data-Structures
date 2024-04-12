@@ -71,7 +71,8 @@ int main()
 		case 3:
 			printf("The resulting sorted linked list is: ");
 			printList(&ll);
-			removeAllItems(&ll);
+			// 출력만 하는 명령어인데 전부 삭제 왜 있음??
+			// removeAllItems(&ll);
 			break;
 		case 0:
 			removeAllItems(&ll);
@@ -90,6 +91,7 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
+	/* add your code here */
 	// ListNode 노드안에 item, next
 	ListNode *pre,*cur;
 
@@ -103,7 +105,7 @@ int insertSortedLL(LinkedList *ll, int item)
 		cur = ll->head;
 		ll->head = malloc(sizeof(ListNode));
 		ll->head->item = item;
-		ll->head->next = cur;
+		ll->head->next = NULL;
 		ll->size++;
 		return 0;
 	}
@@ -119,6 +121,10 @@ int insertSortedLL(LinkedList *ll, int item)
 		else if (cur->item < item){
 			cur = cur->next;
 			index+=1;
+			if(findNode(ll,index)==NULL){
+				insertNode(ll, index, item);
+				return index;
+			}
 		}
 
 		// 지금 값이 item보다 크면 이전 노드에 추가
@@ -126,17 +132,6 @@ int insertSortedLL(LinkedList *ll, int item)
 			insertNode(ll, index, item);
 			return index;
 		}
-	}
-
-	// Find the nodes before and at the target position
-	// Create a new node and reconnect the links
-	if ((pre = findNode(ll, index - 1)) != NULL){
-		cur = pre->next;
-		pre->next = malloc(sizeof(ListNode));
-		pre->next->item = item;
-		pre->next->next = cur;
-		ll->size++;
-		return 0;
 	}
 }
 

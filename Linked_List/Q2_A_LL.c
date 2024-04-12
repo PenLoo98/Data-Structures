@@ -104,6 +104,14 @@ int main()
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+	int end=ll1->size;
+	for(int i=0;i<end;i++){
+		// ll1의 인덱스 바로 뒤에 ll2의 인덱스 노드를 붙인다.
+		if(findNode(ll2,0)!=NULL){
+			insertNode(ll1,2*i+1,ll2->head->item);
+		}
+		removeNode(ll2,0);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
