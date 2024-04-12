@@ -90,7 +90,54 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	// ListNode 노드안에 item, next
+	ListNode *pre,*cur;
+
+	// 빈 리스트면 -1 리턴
+	if(ll == NULL){
+		return -1;
+	}
+
+	// If empty list or inserting first node, need to update head pointer
+	if (ll->head == NULL){
+		cur = ll->head;
+		ll->head = malloc(sizeof(ListNode));
+		ll->head->item = item;
+		ll->head->next = cur;
+		ll->size++;
+		return 0;
+	}
+
+	// 이미 배열이 있는 경우 크면, 작으면 계속 탐색
+	int index = 0;
+	cur = ll->head;
+	while (cur != NULL){
+		if (cur->item == item){
+			return -1;
+		}
+		// 지금 값이 item보다 작으면 계속 탐색
+		else if (cur->item < item){
+			cur = cur->next;
+			index+=1;
+		}
+
+		// 지금 값이 item보다 크면 이전 노드에 추가
+		else if (cur->item > item){
+			insertNode(ll, index, item);
+			return index;
+		}
+	}
+
+	// Find the nodes before and at the target position
+	// Create a new node and reconnect the links
+	if ((pre = findNode(ll, index - 1)) != NULL){
+		cur = pre->next;
+		pre->next = malloc(sizeof(ListNode));
+		pre->next->item = item;
+		pre->next->next = cur;
+		ll->size++;
+		return 0;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
