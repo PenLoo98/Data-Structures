@@ -89,12 +89,49 @@ int main()
 int moveMaxToFront(ListNode **ptrHead)
 {
     /* add your code here */
+	// NULl값 입력시 -1을 리턴
+	if(ptrHead==NULL || *ptrHead==NULL){
+		return -1;
+	}
+
+	// 최대인 값의 원소와 인덱스를 저장한다. 
+	ListNode *cur = *ptrHead, *prev = NULL;
+	ListNode *prevMaxNode = NULL, *maxNode = *ptrHead;
+	int maxValue=cur->item;
+	
+	// 최대값 노드 구하기
+	while(cur->next!=NULL){
+		if(maxValue < cur->item){
+			prevMaxNode=prev;
+			maxNode=cur;
+			maxValue=cur->item;
+		}
+		prev = cur;
+		cur = cur->next;
+	};
+
+	// 최대값이 마지막에 있는 경우 확인
+	if(maxValue < cur->item){
+		prevMaxNode=prev;
+		maxNode=cur;
+		maxValue=cur->item;
+	}
+
+	// 최대값이 첫번째가 아닌 경우
+	if (prevMaxNode!=NULL){
+		// 1. 최대값 노드 이전 노드를 최대값 다음 노드에 연결한다. 
+		prevMaxNode->next=maxNode->next;
+		// 2. 최대값 노드의 next를 0번째 노드로 연결한다. 
+		maxNode->next=*ptrHead;
+		// 3. 최대값 노드를 첫번째 노드로 설정한다.
+		*ptrHead=maxNode;
+	}
+	return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
 void printList(LinkedList *ll){
-
 	ListNode *cur;
 	if (ll == NULL)
 		return;

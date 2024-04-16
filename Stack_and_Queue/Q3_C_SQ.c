@@ -103,7 +103,34 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+	/* add your code here */
+  	// 짝수의 갯수와 홀수의 갯수가 같은 지 확인하기 
+  	// 스택 사이즈가 홀수면 무조건 not Consecutive
+	int oddCount=0;
+	int evenCount=0;
+	if(s->ll.size%2==1){
+		return 0;
+	}
+	// 스택 사이즈가 짝수면 홀수,짝수 갯수 확인하기
+  	else{
+		// 스택을 전부 꺼내면서 짝수,홀수 갯수 확인하기
+		int stackSize=s->ll.size;
+		for(int i=0;i<stackSize;i++){
+			int output = pop(s);
+			if(output%2==0){
+				evenCount+=1;
+			}
+			else if(output%2==1){
+				oddCount+=1;
+			}
+		}
+		if(evenCount==oddCount){
+			return 1;
+		}
+		else if(evenCount!=oddCount){
+			return 0;
+		}
+  	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

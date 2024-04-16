@@ -114,11 +114,34 @@ int main()
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
     /* add your code here */
+	ListNode *temp = ll->head;
+	while(temp!=NULL){
+		push(s,temp->item);
+		temp=temp->next;
+	}
 }
 
 void removeEvenValues(Stack *s)
 {
 	/* add your code here */
+	Stack temp;
+	temp.ll.head=NULL;
+	temp.ll.size=0;
+
+	int stackSize = s->ll.size;
+	int oddCount = 0;
+	// 홀수만 temp 스택에 저장
+	for(int i=0;i<stackSize;i++){
+		int output=pop(s);
+		if(output%2==1){
+			push(&temp,output);
+			oddCount+=1;
+		}
+	}
+	// temp에 저장된 스택을 다시 s에 저장해 순서를 맞춘다.
+	for(int i=0;i<oddCount;i++){
+		push(s,pop(&temp));
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

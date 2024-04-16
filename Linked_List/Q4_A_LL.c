@@ -87,6 +87,44 @@ int main()
 void moveEvenItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+	// 리스트 추가해서 풀기
+	int index = 0;
+
+	LinkedList evenList;
+    evenList.head=NULL;
+    evenList.size=0;
+	
+	// 짝수면 evenList에 추가하고 ll에서 삭제한다.
+	while (index < ll->size){
+		// 짝수이면 evenList에 추가
+		if(findNode(ll,index)->item%2==0){
+			insertNode(&evenList, evenList.size, findNode(ll,index)->item);
+			removeNode(ll,index);
+		}
+		else{
+			// 홀수이면 그냥 다음으로 넘어가기
+			index++;
+		}
+	}
+	// ll+oddList
+
+	ListNode *cur;
+	cur = ll->head;
+
+	// 모두 짝수면 예외처리 해주기 
+	if (cur==NULL){
+		ll->head=evenList.head;
+		ll->size=evenList.size;
+	}
+	else{
+		// ll의 tail 찾기
+		while(cur->next!=NULL){
+			cur=cur->next;
+		}
+		// ll의 tail과 oddList의 head연결하기
+		cur->next=evenList.head;
+		ll->size+=evenList.size;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

@@ -85,9 +85,23 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 
-void RecursiveReverse(ListNode **ptrHead)
-{
+void RecursiveReverse(ListNode **ptrHead){
 	/* add your code here */
+	ListNode *curNode, *nextNode;
+
+	curNode=*ptrHead;
+	nextNode=curNode->next;
+
+	// 종료 조건
+	if(nextNode==NULL){
+		return;
+	}
+	RecursiveReverse(&nextNode);
+	curNode->next->next=curNode;
+	curNode->next=NULL;
+	// 이때 ptrHead는 이전 노드의 &nextNode를 가리킨다.
+	*ptrHead = nextNode;
+	return;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -103,6 +103,20 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+	// 반으로 나눌 인덱스 index를 구한다.
+	int index; 
+	index = ll->size/2;
+
+	// ll head를 resultFrontList에 연결한다.
+	resultFrontList->head = ll->head;
+
+	// index+1번째 노드를 resultBackList 시작노드로 설정하고, ll의 index번째 next를 NULL로 한다.
+	resultBackList->head = findNode(ll,index)->next;
+	findNode(ll,index)->next=NULL;
+
+	// 나눈 ll을 초기화해준다.
+	ll->head=NULL;
+	ll->size=0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
