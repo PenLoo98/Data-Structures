@@ -104,7 +104,41 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	/* add your code here */
+	Stack temp;
+	temp.ll.head=NULL;
+	temp.ll.size=0;
+
+	int index=0;
+	while(expression[index]!=NULL){
+		// {[(이면 push 
+		if(expression[index]=='(' || expression[index]=='{' || expression[index]=='['){
+			push(&temp, expression[index]);
+		}
+		// )]}이면 pop한다.
+		else{
+			char topChar = peek(&temp);
+			if(topChar=='(' && expression[index]==')'){
+				pop(&temp);
+			}
+			else if(topChar=='{' && expression[index]=='}'){
+				pop(&temp);
+			}
+			else if(topChar=='[' && expression[index]==']'){
+				pop(&temp);
+			}
+		}
+		index+=1;
+	};
+
+	// 만약 stack에 남아있다면 False, 없다면 True 반환
+	// 근데 위에 결과 출력하는 86~91줄은 반대로 되어있네? 
+	if(isEmptyStack(&temp)){
+		return 0;
+	}
+	else{
+		return 1;
+	}
 }
 
 ////////////////////////////////////////////////////////////

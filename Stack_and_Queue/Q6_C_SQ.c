@@ -111,8 +111,11 @@ int main()
 
 void removeUntil(Stack *s, int value)
 {
-/* add your code here */
-
+	/* add your code here */
+	// pop하다가 value를 찾으면 temp스택에 넣고 나머지 s을 비운다. 
+	while(peek(s)!=value){
+		pop(s);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////
