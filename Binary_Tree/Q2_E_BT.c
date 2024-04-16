@@ -98,6 +98,20 @@ int maxHeight(BTNode *node)
 
 {
     /* add your code here */
+    // 종료 조건 
+    if(node==NULL){
+        return -1;
+    }
+    // 부모 노드의 높이는 두 자식 노드의 최대 높이 +1이다.
+    int leftHeight = maxHeight(node->left);
+    int rightHeight = maxHeight(node->right);
+    
+    if(leftHeight>rightHeight){
+        return leftHeight+1;
+    }
+    else if(leftHeight<=rightHeight){
+        return rightHeight+1;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
