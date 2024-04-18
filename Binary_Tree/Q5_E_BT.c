@@ -106,6 +106,17 @@ int main()
 void mirrorTree(BTNode *node)
 {
 	/* add your code here */
+    // 루트 노드를 제외한 좌우 노드를 교체한다. 
+    // 버블 정렬처럼 교체하면 된다.
+    BTNode *temp;
+    if(node == NULL){
+        return;
+    }
+    mirrorTree(node->left);
+    mirrorTree(node->right);
+    temp = node->left;
+    node->left = node->right;
+    node->right = temp;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

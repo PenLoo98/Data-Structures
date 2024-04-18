@@ -103,6 +103,22 @@ int main()
 int smallestValue(BTNode *node)
 {
 	/* add your code here */
+    int left, right, smallest;
+    if(node==NULL){
+        return 0;
+    }
+    smallest=node->item;
+    left=smallestValue(node->left);
+    right=smallestValue(node->right);
+
+    // 좌우 자식 노드의 값과 현재 노드 값 중 가장 작은 값을 저장한다.
+    if(left < smallest && right!=0){
+        smallest=left;
+    }   
+    if(right < smallest && left!=0){
+        smallest=right;
+    }
+    return smallest;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

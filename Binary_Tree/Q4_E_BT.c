@@ -104,6 +104,17 @@ int sumOfOddNodes(BTNode *node)
 
 {
     /* add your code here */
+    int sum = 0;
+    if(node == NULL){
+        return 0;
+    }
+    // 현재 노드가 홀수인 경우
+    if(node->item % 2 == 1){
+        sum += node->item;
+    }
+    sum += sumOfOddNodes(node->left);
+    sum += sumOfOddNodes(node->right);
+    return sum;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

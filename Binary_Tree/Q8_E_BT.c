@@ -103,6 +103,21 @@ int main()
 int hasGreatGrandchild(BTNode *node)
 {
 	/* add your code here */
+    // 해당 노드의 깊이가 3 이상인 경우, 이 노드의 아이템을 출력합니다.
+    // 함수가 반환하는 것은 깊이입니다.
+    
+    // 재귀로 짠다면 노드의 자식 노드은 손주가 있어야 한다. 
+    // 노드의 손주 노드는 자식이 있어야 한다.
+    if(node == NULL){
+        return 0;
+    }
+    int left = hasGreatGrandchild(node->left);
+    int right = hasGreatGrandchild(node->right);
+    // 깊이가 3이면 증손자가 있다는 뜻이므로 출력
+    if(left == 3 || right == 3){
+        printf("%d\n",node->item);
+    }
+    return left>right ? left+1 : right+1;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

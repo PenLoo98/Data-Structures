@@ -102,6 +102,24 @@ int countOneChildNodes(BTNode *node)
 
 {
     /* add your code here */
+    if(node==NULL){
+        return 0;
+    }
+    // 자식 노드가 1개인 노드
+    // 1. 자신은 NULL이 아니면서
+    // 2. 자식 노드가 1개인 노드인데 그 노드의 left,right가 NULL이다.
+    
+    // 현재 노드가 왼쪽 자식 노드를 가진 경우
+    if(node->left!=NULL && node->right==NULL){
+        return 1+countOneChildNodes(node->left);
+    }
+    // 현재 노드가 오른쪽 자식 노드를 가진 경우
+    else if(node->left==NULL && node->right!=NULL){
+        return 1+countOneChildNodes(node->right);
+    }
+    else{
+        return countOneChildNodes(node->left)+countOneChildNodes(node->right);
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
